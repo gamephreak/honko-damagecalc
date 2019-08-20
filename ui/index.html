@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title>Pokémon Damage Calculator</title>
+    <link type="text/css" rel="stylesheet" href="./vendor/css/normalize-8.0.1.min.css" />
+    <link type="text/css" rel="stylesheet" href="./vendor/css/select2-4.0.8.min.css" />
+    <link rel="stylesheet" href="main.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-26211653-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-26211653-3');
+
+        window.onerror = function(err, uri, line) {
+            gtag('event', 'exception', {'description': uri + ':' + line + ': ' + err});
+            return false;
+        };
+    </script>
+</head>
+<body>
+<nav>
+    <header>
+        <ul>
+            <li><a class="button" href="//pokemonshowdown.com"><img src="./img/pokemonshowdownbeta.png" alt="Pok&eacute;mon Showdown! (beta)" /> Home</a></li>
+            <li><a class="button" href="//dex.pokemonshowdown.com">Pok&eacute;dex</a></li>
+            <li><a class="button" href="//replay.pokemonshowdown.com/">Replays</a></li>
+            <li><a class="button" href="//pokemonshowdown.com/ladder/">Ladder</a></li>
+            <li><a class="button" href="//pokemonshowdown.com/forums/">Forum</a></li>
+            <li><a class="button play" href="//play.pokemonshowdown.com/">Play</a></li>
+        </ul>
+    </header>
+</nav>
+
+<div id="display">
+</div>
+
+<script type="text/javascript" src="./vendor/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="./vendor/js/select2-4.0.8.min.js"></script>
+<script type="text/javascript" src="./vendor/js/url-search-params-0.1.2.min.js"></script>
+</body>
+</html>
