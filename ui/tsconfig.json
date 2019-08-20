@@ -1,0 +1,21 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "target": "es3",
+    "removeComments": true,
+    "lib": [
+      "dom",
+      "es6",
+      "es2018"
+    ]
+  },
+  "exclude": [
+    "dist"
+  ]
+}
