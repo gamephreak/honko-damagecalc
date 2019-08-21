@@ -8,6 +8,7 @@ body {
     color: black;
     margin: 0;
     padding: 0;
+    min-width: 320px;
 }
 
 ul {
@@ -19,74 +20,6 @@ ul {
     padding-block-end: 0;
     padding-inline-start: 0;
     padding-inline-end: 0;
-}
-
-/* Header */
-
-a img {
-    border: 0;
-}
-
-nav {
-    background: #E5ECFB;
-    background: -webkit-gradient(linear, left top, left bottom, from(#E8EEFC), to(#D7DEEA));
-    background: -moz-linear-gradient(top,  #E8EEFC,  #D7DEEA);
-    background: linear-gradient(top,  #E8EEFC,  #D7DEEA);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8EEFC', endColorstr='#D7DEEA');
-    border-bottom: 1px solid #AAA;
-    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .6), 0px 2px 2px rgba(0, 0, 0, .15);
-    min-height: 50px;
-}
-
-header {
-    max-width: 605px;
-    margin: 0 auto;
-}
-
-nav .button img {
-    position: absolute;
-    top: -8px;
-    left: -150px;
-}
-
-nav ul {
-    padding: 15px 6px 15px 6px;
-    margin-left: 150px;
-}
-
-nav li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-
-
-nav .button {
-    position: relative;
-	padding: 5px 10px;
-    margin: 0 -1px 0 0;
-    border-radius: 0;
-}
-
-nav .button:hover {
-    z-index: 10;
-}
-
-nav li:nth-child(1) .button,
-.button.play {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-nav li:nth-last-child(2) .button,
-.button.play {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-.button.play {
-    margin-left: 10px;
 }
 
 .button {
@@ -124,6 +57,113 @@ nav li:nth-last-child(2) .button,
     background: -moz-linear-gradient(top,  #cfcfcf,  #f2f2f2);
     background: linear-gradient(top,  #cfcfcf,  #f2f2f2);
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#cfcfcf', endColorstr='#f2f2f2');
+}
+
+/* Header */
+
+a img {
+    border: 0;
+}
+
+nav {
+    background: #E5ECFB;
+    background: -webkit-gradient(linear, left top, left bottom, from(#E8EEFC), to(#D7DEEA));
+    background: -moz-linear-gradient(top,  #E8EEFC,  #D7DEEA);
+    background: linear-gradient(top,  #E8EEFC,  #D7DEEA);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#E8EEFC', endColorstr='#D7DEEA');
+    border-bottom: 1px solid #AAA;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .6), 0px 2px 2px rgba(0, 0, 0, .15);
+    min-height: 40px;
+}
+
+header {
+    max-width: 605px;
+    margin: 0 auto;
+}
+
+nav li:first-child .button:before {
+    content: url('./img/favicon-32.png');
+    position: absolute;
+    top: -8px;
+    left: -36px;
+}
+
+header {
+    margin: 0 auto;
+}
+
+nav ul {
+    padding: 15px 6px 15px 6px;
+    margin-left: 70px;
+}
+
+nav .button {
+    position: relative;
+	padding: 3px 10px;
+    margin: 0 -1px 0 0;
+    border-radius: 0;
+}
+
+nav li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    font-size: 10px;
+}
+
+.button.play {
+    margin-left: 5px;
+}
+
+nav li:nth-child(3) .button,
+nav li:nth-child(4) .button {
+    display: none;
+}
+
+@media(min-width: 360px) {
+    header { max-width: 360px; }
+    nav ul { margin-left: 60px; }
+    nav li:nth-child(3) .button { display: initial; }
+}
+
+@media(min-width: 380px) {
+    header { max-width: 380px; }
+}
+
+@media(min-width: 420px) {
+    header { max-width: 420px; }
+    nav li:nth-child(4) .button { display: initial; }
+}
+
+@media(min-width: 605px) {
+    header { max-width: 605px; }
+    nav { min-height: 50px; }
+    nav ul { margin-left: 150px; }
+    nav li { font-size: 10pt; }
+    nav li:first-child .button:before {
+        content: url('./img/pokemonshowdownbeta.png');
+        top: -8px;
+        left: -150px;
+    }
+    nav .button { padding: 5px 10px; }
+    .button.play { margin-left: 10px; }
+}
+
+nav .button:hover {
+    z-index: 10;
+}
+
+nav li:nth-child(1) .button,
+.button.play {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+nav li:nth-last-child(2) .button,
+.button.play {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .button.play {

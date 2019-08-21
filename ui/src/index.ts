@@ -22,4 +22,4 @@ $('#display').html(calc.calculate(
   new calc.Pokemon(1, 'Gengar'),
   new calc.Pokemon(1, 'Chansey'),
   new calc.Move(1, 'Thunderbolt')
-).desc());
+).desc());  
