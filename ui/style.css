@@ -22,7 +22,7 @@ ul {
     padding-inline-end: 0;
 }
 
-.btn {
+.toggle {
     text-align: center;
     border: solid 1px #aaaaaa;
     padding: 4px 4px;
@@ -35,60 +35,47 @@ ul {
     width: 5em;
     border-radius: 8px;
 }
-.btn-wide {
-    width: 7em;
-}
-.btn-xwide {
-    width: 8em;
-}
-.btn-xxwide {
-    width: 9em;
-}
-.btn-xxxwide {
-    width: 10em;
-}
-.btn-small {
+
+.toggle {
     width: 3em;
 }
 @media(min-width: 375px) {
-    .btn-small { width: 4em; }
+    .toggle { width: 4em; }
 }
-.btn-xsmall {
-    width: 1em;
-}
-.btn-left {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.btn-right {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.btn-top {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.btn-bottom {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-.btn-mid {
+
+.toggle-group label {
     border-radius: 0;
+}
+.toggle-group.horizontal label:first-of-type {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.toggle-group.horizontal label:last-of-type {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.toggle-group.vertical label:first-of-type {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.toggle-group.vertical label:last-of-type {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
  /* Add visual indication when focusing on visually hidden elements */
-.hide:focus + .btn,
-.btn:hover {
+.hide:focus + .toggle,
+.toggle:hover {
     z-index: 10;
     border-color: #777777;
     background: #e3e3e3;
 }
-.hide:checked + .btn, button.checked {
+.hide:checked + .toggle, button.checked {
     font-weight: bold;
     color: #111111;
     background: #f5f5f5;
 }
-.hide[type="radio"]:checked + .btn {
+.hide[type="radio"]:checked + .toggle {
     cursor: default;
 }
 
@@ -104,7 +91,7 @@ ul {
     white-space: nowrap;
 }
 
-.hide:disabled + .btn {
+.hide:disabled + .toggle {
     color: #999999;
 }
 
