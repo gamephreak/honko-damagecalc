@@ -17,9 +17,9 @@ console.log(Icons.getItem('Life Orb'));
 console.log(Icons.getType('Ghost'));
 
 //$('#display').select2();
-$('#display').html(calc.calculate(
-  1,
-  new calc.Pokemon(1, 'Gengar'),
-  new calc.Pokemon(1, 'Chansey'),
-  new calc.Move(1, 'Thunderbolt')
-).desc());  
+// $('#display').after('<span>' + calc.calculate(
+//   1,
+//   new calc.Pokemon(1, 'Gengar'),
+//   new calc.Pokemon(1, 'Chansey'),
+//   new calc.Move(1, 'Thunderbolt')
+// ).desc() + '</span>');
