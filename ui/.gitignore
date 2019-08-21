@@ -3,6 +3,7 @@ node_modules/
 eslint-cache/
 .eslintcache
 .DS_Store
+.cache/
 Thumbs.db
 npm-debug.log
 package-lock.json
