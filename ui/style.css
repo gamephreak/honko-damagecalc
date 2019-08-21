@@ -265,10 +265,16 @@ nav li:nth-last-child(2) .button,
 
 /* Options */
 
-#gen {
+#options .row {
     text-align: center;
     margin-top: 6px;
 }
 @media(min-width: 605px) {
-    #gen { margin-top: 10px; }
+    #options .row { margin-top: 10px; }
+}
+
+#format + .select2-container {
+    text-align: center;
+    font-weight: bold;
+    margin: 0 10px;
 }

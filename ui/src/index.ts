@@ -16,7 +16,26 @@ console.log(Icons.getPokemon('Vaporeon'));
 console.log(Icons.getItem('Life Orb'));
 console.log(Icons.getType('Ghost'));
 
-//$('#display').select2();
+// TODO: discover programmactically based on which formats have strategies
+// TODO sort by usage stats battle numbers
+// TODO Random / Random Doubles
+const FORMATS = [
+    ['Uber', 'OU', 'UU', 'LC'],
+    ['Uber', 'OU', 'UU', 'NU', 'LC'],
+    ['Uber', 'OU', 'UU', 'NU', 'LC'],
+    ['Uber', 'OU', 'UU', 'NU', 'LC'],
+     // DW OU, VGC 11/12
+    ['Uber', 'OU', 'UU', 'RU', 'NU', 'LC', 'Doubles'],
+    // AAA, MC, STABmons, VGC 14/15/16, Mix and Mega
+    ['Uber', 'OU', 'UU', 'RU', 'NU', 'PU', 'LC', 'Monotype', 'Doubles', 'AG', 'BSS', 'BSD', 'BH', 'CAP' ],
+      // LGPE OU, AAA, MC, STABmons, VGC 17/18/19, Mix and Mega
+    ['Uber', 'OU', 'UU', 'RU', 'NU', 'PU', 'LC', 'Monotype', 'Doubles', 'AG', 'BSS', 'BSD', 'BH', 'CAP', '1v1', 'ZU' ],
+];
+
+$('#format').select2({
+    data: FORMATS[6].map((text, id) => ({id, text, selected: text === 'OU'})),
+    width: '10em',
+});
 // $('#display').after('<span>' + calc.calculate(
 //   1,
 //   new calc.Pokemon(1, 'Gengar'),
