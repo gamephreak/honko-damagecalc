@@ -12,9 +12,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'UA-26211653-3');
-
         window.onerror = function(err, uri, line) {
             gtag('event', 'exception', {'description': uri + ':' + line + ': ' + err});
             return false;

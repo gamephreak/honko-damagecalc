@@ -36,9 +36,7 @@ ul {
     border-radius: 8px;
 }
 
-.toggle {
-    width: 3em;
-}
+.toggle { width: 3em; }
 @media(min-width: 375px) {
     .toggle { width: 4em; }
 }
@@ -271,7 +269,6 @@ nav li:nth-last-child(2) .button,
     text-align: center;
     margin-top: 6px;
 }
-
 @media(min-width: 605px) {
     #gen { margin-top: 10px; }
 }
