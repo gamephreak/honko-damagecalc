@@ -85,8 +85,6 @@ ul {
     overflow: hidden;
     position: absolute;
     top: auto;
-     /* https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe */
-    white-space: nowrap;
 }
 
 .hide:disabled + .toggle {
@@ -116,7 +114,11 @@ header {
 }
 
 nav li:first-child .button:before {
-    content: url('./img/favicon-32.png');
+    content: '';
+    background-image: url('./img/pokemonshowdownbeta.icon.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
     position: absolute;
     top: -8px;
     left: -36px;
@@ -162,12 +164,14 @@ nav li:nth-child(4) .button {
 }
 
 @media(min-width: 380px) {
+    nav ul { margin-left: 35px; }
     header { max-width: 380px; }
+    nav li:nth-child(4) .button { display: initial; }
 }
 
 @media(min-width: 420px) {
+    nav ul { margin-left: 60px; }
     header { max-width: 420px; }
-    nav li:nth-child(4) .button { display: initial; }
 }
 
 @media(min-width: 605px) {
@@ -177,7 +181,11 @@ nav li:nth-child(4) .button {
     nav ul { margin-left: 150px; }
     nav li { font-size: 10pt; }
     nav li:first-child .button:before {
-        content: url('./img/pokemonshowdownbeta.png');
+        content: '';
+        background-image: url('./img/pokemonshowdownbeta.png');
+        background-size: 146px 44px;
+        width: 146px;
+        height: 44px;
         top: -8px;
         left: -150px;
     }
