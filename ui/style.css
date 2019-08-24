@@ -2,6 +2,7 @@
 
 /* General */
 
+html,
 body {
     font: 11px Verdana, sans-serif;
     background-color: white;
@@ -9,6 +10,7 @@ body {
     margin: 0;
     padding: 0;
     min-width: 320px;
+    height: 100%;
 }
 
 ul {
@@ -33,7 +35,7 @@ ul {
     margin: -1px -3px 0;
     display: inline-block;
     width: 5em;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .toggle { width: 3em; }
@@ -45,20 +47,20 @@ ul {
     border-radius: 0;
 }
 .toggle-group.horizontal label:first-of-type {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 .toggle-group.horizontal label:last-of-type {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 .toggle-group.vertical label:first-of-type {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 .toggle-group.vertical label:last-of-type {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
  /* Add visual indication when focusing on visually hidden elements */
@@ -302,8 +304,23 @@ nav li:nth-last-child(2) .button,
     text-align: center;
     font-weight: bold;
     margin: 0 10px;
+    color: #111;
+    position: relative;
+    top: -1px;
 }
 
 .select2-container *:focus {
   outline: none;
 }
+.select2-container--default .select2-selection--single {
+    background-color:#f5f5f5 !important;
+}
+
+/* .select2-selection__rendered {
+    line-height: 25px !important;
+}
+.select2-container .select2-selection--single {
+    height: 25px !important;
+} */
+
+
