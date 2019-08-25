@@ -18,6 +18,21 @@ console.log(Icons.getType('Ghost'));
 
 type Format = keyof typeof FORMATS;
 
+// Formats organized roughly by usage with the caveat at similar metagames are
+// grouped together:
+//
+//   - Random is the most popular metagame by far, so belongs at the top
+//   - AG and Ubers logically sort together and sort on top of OU with regards
+//     to the amount of Pokemon available, as well as being highly played
+//   - Monotype is highly popular and is sorted under Random due to both its name
+//     length and to provide for a logical AG -> Uber -> OU etc progression
+//   - OU to ZU are sorted logically, which also happens to roughly follow usage.
+//     OU is selected by default as the flagship (and second most popular format)
+//   - Doubles sorts above VGC despite VGC's higher popularity due to it being 
+//     logically similar to the other Smogon official tiers and so that all of
+//     the Nintendo-official formats can be grouped together
+//   - The remaining formats are sorted purely by popularity
+
 const FORMATS = {
   Random: 1,
   Monotype: 2,
