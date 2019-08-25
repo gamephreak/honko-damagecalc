@@ -7,7 +7,7 @@ import select2 from 'select2/dist/js/select2.full.js';
 select2($);
 import 'select2/dist/css/select2.css';
 
-import { Sprites, Icons } from './img';
+import { Sprites, Icons, toID } from './img';
 import * as calc from 'calc';
 
 console.log(Sprites.forBattle('Charizard-Mega-Y'));
@@ -124,10 +124,10 @@ $('#format').select2({
 //   new calc.Move(1, 'Thunderbolt')
 // ).desc() + '</span>');
 
-const data = [];
+const types = [];
 let num = 0;
 for (const type in calc.TYPE_CHART[7]) {
-  data.push({
+  types.push({
     id: num++,
     html: type === 'None' ? '<div style="height: 14px; width: 32px;"></div>' : Icons.getType(type),
     text: type,
@@ -135,11 +135,41 @@ for (const type in calc.TYPE_CHART[7]) {
 }
 
 $('.type').select2({
-  data,
+  data: types,
   width: '40px',
   escapeMarkup: m => m,
   templateResult: d => d.html,
   templateSelection: d => d.html,
-  containerCssClass: 'type',
-  dropdownCssClass: 'type',
+  containerCssClass: 'type-select',
+  dropdownCssClass: 'type-select',
+});
+
+const STATUSES = {
+  '': 'Healthy',
+  PSN: 'Poisoned',
+  PAR: 'Paralyzed',
+  BRN: 'Burned',
+  TOX: 'Badly Poisoned (Toxic)',
+  SLP: 'Asleep',
+  FRZ: 'Frozen',
+};
+
+const statuses = [];
+num = 0;
+for (const status in STATUSES) {
+  statuses.push({
+    id: num++,
+    html: `<div title="${STATUSES[status]}" class="status ${toID(status)}" style="height: 16px; line-height: 16px; width: 28px;">${status}</div>`,
+    text: STATUSES[status],
+  })
+}
+
+$('.status').select2({
+  data: statuses,
+  width: '40px',
+  escapeMarkup: m => m,
+  templateResult: d => d.html,
+  templateSelection: d => d.html,
+  containerCssClass: 'status-select',
+  dropdownCssClass: 'status-select',
 });

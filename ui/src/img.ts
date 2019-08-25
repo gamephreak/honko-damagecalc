@@ -12,7 +12,7 @@ interface DexData {
 
 type ID = '' | string & { __isID: true };
 
-function toID(text: any): ID {
+export function toID(text: any): ID {
   return ('' + text).toLowerCase().replace(/[^a-z0-9]+/g, '') as ID;
 }
 

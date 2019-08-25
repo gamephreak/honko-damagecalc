@@ -22,8 +22,7 @@
     "calc": "file:../calc",
     "jquery": "^3.4.1",
     "normalize.css": "^8.0.1",
-    "select2": "^4.0.9",
-    "url-search-params": "^1.1.0"
+    "select2": "^4.0.9"
   },
   "devDependencies": {
     "gts": "^1.1.0",
