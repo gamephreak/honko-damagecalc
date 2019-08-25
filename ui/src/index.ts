@@ -2,7 +2,7 @@ const URLSearchParams = require('url-search-params');
 
 import $ from 'jquery';
 // @ts-ignore
-import select2 from 'select2';
+import select2 from 'select2/dist/js/select2.full.js';
 // @ts-ignore
 select2($);
 import 'select2/dist/css/select2.css';
@@ -123,3 +123,23 @@ $('#format').select2({
 //   new calc.Pokemon(1, 'Chansey'),
 //   new calc.Move(1, 'Thunderbolt')
 // ).desc() + '</span>');
+
+const data = [];
+let num = 0;
+for (const type in calc.TYPE_CHART[7]) {
+  data.push({
+    id: num++,
+    html: type === 'None' ? '<div style="height: 14px; width: 32px;"></div>' : Icons.getType(type),
+    text: type,
+  })
+}
+
+$('.type').select2({
+  data,
+  width: '40px',
+  escapeMarkup: m => m,
+  templateResult: d => d.html,
+  templateSelection: d => d.html,
+  containerCssClass: 'type',
+  dropdownCssClass: 'type',
+});

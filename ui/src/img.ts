@@ -175,13 +175,7 @@ export const Icons = new (class {
   }
 })();
 
-const URL = (() => {
-  let prefix = '';
-  if (!window.document || !document.location || document.location.protocol !== 'http:') {
-    prefix = 'https:';
-  }
-  return prefix + '//play.pokemonshowdown.com/';
-})();
+const URL = 'https://play.pokemonshowdown.com/';
 
 interface PokemonData extends DexData {
   id: ID;

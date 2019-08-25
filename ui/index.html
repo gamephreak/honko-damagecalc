@@ -49,13 +49,13 @@
         </div>
         <div class="row">
             <span id="gameType" class="toggle-group horizontal" aria-labelledby="gameTypeAria" role="radiogroup" title="Select the battle format.">
-                <span class="hide" id="gameTypeAria">Select the battle format.</span>
+                <span class="hide" id="gameTypeAria">Select the game type.</span>
                 <input class="hide" type="radio" name="gameType" value="Singles" id="singles" checked="checked" />
                 <label class="toggle" for="singles">Singles</label>
                 <input class="hide" type="radio" name="gameType" value="Doubles" id="doubles" />
                 <label class="toggle" for="doubles">Doubles</label>
             </span>
-            <select id="format"></select>
+            <label class="hide" for="format">Select the battle format.</label><select id="format"></select>
             <span id="notation" class="toggle-group horizontal gen-specific g3 g4 g5 g6 g7" aria-labelledby="notationAria" role="radiogroup" title="Select the output notation.">
                 <span class="hide" id="notationAria">Select the output notation.</span>
                 <input class="hide" type="radio" name="notation" id="pixels" value="px" /><label class="toggle" for="pixels">48px</label>
@@ -63,6 +63,9 @@
             </span>
         </div>
     </div>
+
+    <center style="margin-top: 50px;"><select class="type type1"></select><select class="type type2"></select></center>
+
 </div>
 
 <script type="text/javascript" src="./src/index.ts"></script>
