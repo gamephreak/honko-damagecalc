@@ -331,10 +331,13 @@ nav li:nth-last-child(2) .button,
 
 /* Type / Status */
 
-.status {
+.status.icon {
 	color: white;
 	border-radius: 3px;
-	padding: 0 2px;
+    padding: 0 2px;
+    height: 16px;
+    line-height: 16px;
+    width: 30px;
 }
 .status.brn { background: #EE5533; }
 .status.psn, .status.tox { background: #A4009A; }

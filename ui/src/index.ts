@@ -10,11 +10,21 @@ import 'select2/dist/css/select2.css';
 import { Sprites, Icons, toID } from './img';
 import * as calc from 'calc';
 
-console.log(Sprites.forBattle('Charizard-Mega-Y'));
-console.log(Sprites.forTeambuilder('Charizard-Mega-X'));
-console.log(Icons.getPokemon('Vaporeon'));
-console.log(Icons.getItem('Life Orb'));
-console.log(Icons.getType('Ghost'));
+interface DataFormat extends Select2.DataFormat {
+  html?: string;
+}
+
+function select(selector: string, data: DataFormat[], options: { width?: string; class?: string }) {
+  $(selector).select2({
+    data,
+    width: options.width,
+    escapeMarkup: m => m,
+    templateResult: d => (d as DataFormat).html || d.text,
+    templateSelection: d => (d as DataFormat).html || d.text,
+    containerCssClass: options.class,
+    dropdownCssClass: options.class,
+  });
+}
 
 type Format = keyof typeof FORMATS;
 
@@ -28,11 +38,10 @@ type Format = keyof typeof FORMATS;
 //     length and to provide for a logical AG -> Uber -> OU etc progression
 //   - OU to ZU are sorted logically, which also happens to roughly follow usage.
 //     OU is selected by default as the flagship (and second most popular format)
-//   - Doubles sorts above VGC despite VGC's higher popularity due to it being 
+//   - Doubles sorts above VGC despite VGC's higher popularity due to it being
 //     logically similar to the other Smogon official tiers and so that all of
 //     the Nintendo-official formats can be grouped together
 //   - The remaining formats are sorted purely by popularity
-
 const FORMATS = {
   Random: 1,
   Monotype: 2,
@@ -113,16 +122,8 @@ const SUPPORTED: Format[][] = [
   ],
 ];
 
-$('#format').select2({
-  data: SUPPORTED[7].map((text, id) => ({ id, text, selected: text === 'OU' })),
-  width: '10em',
-});
-// $('#display').after('<span>' + calc.calculate(
-//   1,
-//   new calc.Pokemon(1, 'Gengar'),
-//   new calc.Pokemon(1, 'Chansey'),
-//   new calc.Move(1, 'Thunderbolt')
-// ).desc() + '</span>');
+const formats = SUPPORTED[7].map((text, id) => ({ id, text, selected: text === 'OU' }));
+select('#format', formats, { width: '10em' });
 
 const types = [];
 let num = 0;
@@ -131,20 +132,12 @@ for (const type in calc.TYPE_CHART[7]) {
     id: num++,
     html: type === 'None' ? '<div style="height: 14px; width: 32px;"></div>' : Icons.getType(type),
     text: type,
-  })
+  } as DataFormat);
 }
 
-$('.type').select2({
-  data: types,
-  width: '40px',
-  escapeMarkup: m => m,
-  templateResult: d => d.html,
-  templateSelection: d => d.html,
-  containerCssClass: 'type-select',
-  dropdownCssClass: 'type-select',
-});
+select('.type', types, { width: '40px', class: 'type-select' });
 
-const STATUSES = {
+const STATUSES: { [status: string]: string } = {
   '': 'Healthy',
   PSN: 'Poisoned',
   PAR: 'Paralyzed',
@@ -159,17 +152,16 @@ num = 0;
 for (const status in STATUSES) {
   statuses.push({
     id: num++,
-    html: `<div title="${STATUSES[status]}" class="status ${toID(status)}" style="height: 16px; line-height: 16px; width: 28px;">${status}</div>`,
+    html: `<div title="${STATUSES[status]}" class="status icon ${toID(status)}">${status}</div>`,
     text: STATUSES[status],
-  })
+  } as DataFormat);
 }
 
-$('.status').select2({
-  data: statuses,
-  width: '40px',
-  escapeMarkup: m => m,
-  templateResult: d => d.html,
-  templateSelection: d => d.html,
-  containerCssClass: 'status-select',
-  dropdownCssClass: 'status-select',
-});
+select('.status', statuses, { width: '42px', class: 'status-select' });
+
+// DEBUG
+console.log(Sprites.forBattle('Charizard-Mega-Y'));
+console.log(Sprites.forTeambuilder('Charizard-Mega-X'));
+console.log(Icons.getPokemon('Vaporeon'));
+console.log(Icons.getItem('Life Orb'));
+console.log(Icons.getType('Ghost'));
