@@ -33,11 +33,12 @@
     "lint": "gts check",
     "fix": "gts fix",
     "compile": "tsc -p .",
-    "test": "jest",
+    "test": "true",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run lint",
     "start": "parcel index.html",
     "build": "parcel build index.html"
-  }
+  },
+  "browserslist": "> 0.25%, IE >= 9, Safari >= 5"
 }
