@@ -271,6 +271,15 @@ describe('calc', () => {
         '0 SpA Technician Smeargle Wring Out (60 BP) vs. 252 HP / 0 SpD Blissey: 15-18 (4.1 - 4.9%)'
       );
     });
+    test('foul play', () => {
+      const absol = new Pokemon(7, 'Absol', {evs: { atk: 252 }});
+      const blissey = new Pokemon(7, 'Blissey');
+      const result = calculate(7, absol, blissey, new Move(7, 'Foul Play'));
+      expect(result.damage).toBeRange(102, 121);
+      expect(result.desc()).toBe(
+        'Absol Foul Play (60 BP) vs. 0 HP / 0 Atk / 0 SpD Blissey: 15-18 (4.1 - 4.9%)'
+      );
+    });
   });
   describe('gen 3 spread', () => {
     test('allAdjacent', () => {
