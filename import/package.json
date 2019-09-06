@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^12.7.2",
+    "pokemon-showdown": "file:../../Pokemon-Showdown",
     "@pokemon-showdown/sets": "file:../../Pokemon-Showdown/tools/set-import/sets",
     "calc": "file:../calc",
     "source-map-support": "^0.5.13"

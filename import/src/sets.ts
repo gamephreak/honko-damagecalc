@@ -58,7 +58,7 @@ const CURRENT_ONLY: Format[] = ['Monotype', 'BH', 'CAP', '1v1'];
 const GENS = ['RBY', 'GSC', 'ADV', 'DPP', 'BW', 'XY', 'SM'];
 const USAGE = ['OU', 'UU', 'RU', 'NU', 'PU', 'ZU', 'Uber', 'LC', 'Doubles'];
 
-export async function importAll(dir: string) {
+export async function importSets(dir: string) {
   for (let gen = 1; gen <= 7; gen++) {
     const setsByPokemon: PokemonSets = {};
 
