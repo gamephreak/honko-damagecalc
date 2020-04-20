@@ -1,4 +1,4 @@
-# calc
+# `@smogon/calc`
 
 This package powers the Pokémon Showdown damage calculator, providing a
 programmatic interface for computing damage ranges. While the top level package
