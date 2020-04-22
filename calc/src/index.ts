@@ -141,6 +141,7 @@ export {Field, Side} from './field';
 export {Result} from './result';
 export {GenerationNum, StatsTable, Stat} from './data/interface';
 export {Generations} from './data/index';
+export {State} from './state';
 export {toID} from './util';
 
 export {ABILITIES} from './data/abilities';
