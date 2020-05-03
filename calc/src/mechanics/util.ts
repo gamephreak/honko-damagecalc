@@ -59,7 +59,7 @@ export function computeFinalStats(
   attacker: Pokemon,
   defender: Pokemon,
   field: Field,
-  ...stats: Array<StatName | 'spc'>
+  ...stats: StatName[]
 ) {
   const sides: Array<[Pokemon, Side]> =
     [[attacker, field.attackerSide], [defender, field.defenderSide]];

@@ -97,6 +97,9 @@ export class Pokemon extends A.Pokemon {
       nature?: string;
       moves?: string[];
       curHP?: number;
+      ivs?: Partial<I.StatsTable> & {spc?: number};
+      evs?: Partial<I.StatsTable> & {spc?: number};
+      boosts?: Partial<I.StatsTable> & {spc?: number};
     } = {}
   ) {
     super(typeof gen === 'number' ? Generations.get(gen) : gen, name, options as any);

@@ -1,9 +1,10 @@
 ﻿import * as I from './interface';
-import {toID, extend, DeepPartial} from '../util';
+import {toID, extend, assignWithout, DeepPartial} from '../util';
 
 // TODO: rename these fields to be readable
 export interface SpeciesData {
   readonly types: [I.TypeName] | [I.TypeName, I.TypeName];
+  // FIXME: replace with baseStats
   readonly bs: {
     hp: number;
     at: number;
@@ -8467,15 +8468,7 @@ class Specie implements I.Specie {
   readonly id: I.ID;
   readonly name: I.SpeciesName;
   readonly types!: [I.TypeName] | [I.TypeName, I.TypeName];
-  readonly bs!: {
-    hp: number;
-    at: number;
-    df: number;
-    sa: number;
-    sd: number;
-    sp: number;
-    sl?: number;
-  }; // baseStats
+  readonly baseStats!: I.StatsTable;
   readonly weightkg!: number; // weight
   readonly nfe?: boolean;
   readonly gender?: I.GenderName;
@@ -8483,11 +8476,22 @@ class Specie implements I.Specie {
   readonly isAlternateForme?: boolean;
   readonly abilities?: {0: I.AbilityName}; // ability
 
-  constructor(name: string, data: SpeciesData) {
+  private static readonly EXCLUDE = new Set(['bs']);
+
+  constructor(name: string, data: SpeciesData, gen: number) {
     this.kind = 'Species';
     this.id = toID(name);
     this.name = name as I.SpeciesName;
-    extend(this, data);
+
+    const baseStats: Partial<I.StatsTable> = {};
+    baseStats.hp = data.bs.hp;
+    baseStats.atk = data.bs.at;
+    baseStats.def = data.bs.df;
+    baseStats.spa = gen > 2 ? data.bs.sa : data.bs.sl;
+    baseStats.spd = gen > 2 ? data.bs.sd : data.bs.sl;
+    baseStats.spe = data.bs.sp;
+
+    assignWithout(this, data, Specie.EXCLUDE);
   }
 }
 const SPECIES_BY_ID: Array<{[id: string]: Specie}> = [];
@@ -8496,8 +8500,7 @@ let gen = 0;
 for (const species of SPECIES) {
   const map: {[id: string]: Specie} = {};
   for (const specie in species) {
-    if (gen >= 2 && species[specie].bs.sl) delete species[specie].bs.sl;
-    const m = new Specie(specie, species[specie]);
+    const m = new Specie(specie, species[specie], gen);
     map[m.id] = m;
   }
   SPECIES_BY_ID.push(map);

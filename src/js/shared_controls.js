@@ -658,6 +658,7 @@ function createPokemon(pokeInfo) {
 			name = (species.formes || species.isAlternateForme) ? pokeInfo.find(".forme").val() : pokemonName;
 		}
 
+		// FIXME
 		var baseStats = {};
 		var ivs = {};
 		var evs = {};
@@ -701,7 +702,7 @@ function createPokemon(pokeInfo) {
 				getMoveDetails(pokeInfo.find(".move4"), ability, item, isDynamaxed)
 			],
 			overrides: {
-				bs: baseStats,
+				baseStats: baseStats,
 				types: types,
 				weightkg: +pokeInfo.find(".weight").val()
 			}

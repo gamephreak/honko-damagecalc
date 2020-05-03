@@ -11,6 +11,18 @@ export function toID(text: any): ID {
   return ('' + text).toLowerCase().replace(/[^a-z0-9]+/g, '') as ID;
 }
 
+export function assignWithout(
+  a: {[key: string]: any},
+  b: {[key: string]: any},
+  exclude: Set<string>
+) {
+  for (const key in b) {
+    if (Object.prototype.hasOwnProperty.call(b, key) && !exclude.has(key)) {
+      a[key] = b[key];
+    }
+  }
+}
+
 export function error(err: boolean, msg: string) {
   if (err) {
     throw new Error(msg);

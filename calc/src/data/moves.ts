@@ -1,5 +1,5 @@
 import * as I from '../data/interface';
-import {toID, DeepPartial, extend} from '../util';
+import {toID, assignWithout, DeepPartial, extend} from '../util';
 
 export interface MoveData {
   readonly name?: string;
@@ -3949,14 +3949,6 @@ export class Moves implements I.Moves {
   *[Symbol.iterator]() {
     for (const id in MOVES_BY_ID[this.gen]) {
       yield this.get(id as I.ID)!;
-    }
-  }
-}
-
-function assignWithout(a: {[key: string]: any}, b: {[key: string]: any}, exclude: Set<string>) {
-  for (const key in b) {
-    if (Object.prototype.hasOwnProperty.call(b, key) && !exclude.has(key)) {
-      a[key] = b[key];
     }
   }
 }
