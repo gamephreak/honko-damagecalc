@@ -1,25 +1,114 @@
-#!/bin/bash -ex
+#!/usr/bin/env node
 
-# Setup
+const fs = require('fs');
+const child_process = require('child_process');
+const path = require('path');
 
-rev=$(git rev-parse --short HEAD | tr -d "\n")
+const existsSync = p => {
+  try {
+    fs.statSync(p);
+    return true;
+  } catch (e) {
+    if (e.code === 'ENOENT') return false;
+    throw err;
+  }
+};
 
-# Build
+const rmrfSync = dir => {
+  if (existsSync(dir)) {
+    if (fs.statSync(dir).isDirectory()) {
+      for (const f of fs.readdirSync(dir)) {
+        const filename = path.join(dir, f);
+        const stat = fs.statSync(filename);
+        if (filename === '.' || filename === '..') continue;
+        if (stat.isDirectory()) {
+          rmrfSync(filename);
+        } else {
+          fs.unlinkSync(filename);
+        }
+      }
+      fs.rmdirSync(dir);
+    } else {
+      fs.unlinkSync(dir);
+    }
+  }
+};
 
-node build
+const mkdirSync = dir => {
+  try {
+    fs.mkdirSync(dir, 0755);
+  } catch (e) {
+    if (e.code != 'EEXIST') throw e;
+  }
+};
 
-# Checkout: master -> gh-pages
+const cprSync = (src, dest) => {
+  if (fs.statSync(src).isDirectory()) {
+    mkdirSync(dest);
+    for (const file of fs.readdirSync(src)) {
+      var current = fs.lstatSync(path.join(src, file));
+      if (current.isDirectory()) {
+        cprSync(path.join(src, file), path.join(dest, file));
+      } else if (current.isSymbolicLink()) {
+        var symlink = fs.readlinkSync(path.join(src, file));
+        fs.symlinkSync(symlink, path.join(dest, file));
+      } else {
+        fs.copyFileSync(path.join(src, file), path.join(dest, file));
+      }
+    }
+  } else {
+    fs.copyFileSync(src, dest);
+  }
+};
 
-git checkout gh-pages
+const exec = async (cmd, cwd = __dirname) => {
+  return new Promise(resolve => {
+    child_process.exec(cmd, { cwd }, (error, stdout, stderr) => {
+      resolve([error ? error.code : 0, stdout, stderr]);
+    });
+  });
+};
 
-# Publish
+const IGNORE_STDERR = true;
+const execOrDie = async (cmd, ignoreStderr = !IGNORE_STDERR) => {
+  console.log(cmd);
+  const [error, stdout, stderr] = await exec(cmd, __dirname);
+  if (error || (!ignoreStderr && stderr)) throw new Error(`exec error ${error}: ${stderr}`);
+  return stdout;
+};
 
-cp -a dist/* .
 
-git add -A .
-git commit -m "Publish: '${rev}'"
-git push git@github.com:smogon/damage-calc.git --force gh-pages
+(async () => {
+  // Setup
+  const HEAD = (await execOrDie('git rev-parse HEAD', __dirname, IGNORE_STDERR)).slice(0, 8);
 
-# Checkout: gh-pages -> master
+  // Build
+  await execOrDie('node build');
 
-git checkout -
+  // Checkout: <branch> -> gh-pages
+  await execOrDie('git checkout gh-pages', IGNORE_STDERR);
+
+  // Clean
+  for (const file of fs.readdirSync(__dirname)) {
+    if (file === 'dist' || file === 'node_modules' || file.startsWith('.')) continue;
+    console.log(`rm ${path.join(__dirname, file)}`);
+    rmrfSync(path.join(__dirname, file));
+  }
+  console.log('');
+
+  // Publish
+  const copies = [];
+  for (const file of fs.readdirSync(path.join(__dirname, 'dist'))) {
+    if (file === 'node_modules' || file.startsWith('.')) continue;
+    console.log(`cp ${path.join(__dirname, 'dist', file)}`);
+    cprSync(path.join(__dirname, 'dist', file), __dirname);
+  }
+  await Promise.all(copies);
+
+  // await execOrDie('git add -A .');
+  // await execOrDie(`git commit -m "Publish: '${HEAD}'"`);
+  // await execOrDie('git push git@github.com:smogon/damage-calc.git --force gh-pages');
+
+  // Checkout: gh-pages -> <branch>
+  // await execOrDie('git checkout -', IGNORE_STDERR);
+})();
